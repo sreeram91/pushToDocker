@@ -1,0 +1,26 @@
+name: build and push to docker hub
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  docker-hub:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: checkout source code
+      used: actions/checkout@v2
+
+    - name: checking version
+      run: docker --version
+
+    - name: docker login
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: build the image
+      run: docker build -f Dockerfile.dev -t sreeram91/simple-web .
+
+    - name: push to docker hub
+      run: docker push sreeram91/simple-web
+
