@@ -10,7 +10,7 @@ jobs:
     steps:
     
     - name: checkout source code
-      used: actions/checkout@v2
+      uses: actions/checkout@v2
 
     - name: checking version
       run: docker --version
